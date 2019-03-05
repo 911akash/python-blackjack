@@ -14,13 +14,14 @@ class Deck():
         self.deck = []  # start with an empty list
         for suit in suits:
             for rank in ranks:
-                self.deck.append(Card(rank, suit))
+                self.deck.append(Card.Card(rank, suit))
 
     def __str__(self):
         return str(self.deck)
 
     def shuffle(self):
-        random.shuffle(self.deck)
+
+        shuffle(self.deck)
 
     def popacard(self):
         return self.deck.pop()

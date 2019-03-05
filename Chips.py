@@ -19,5 +19,3 @@ class Chips():
     def bet_loose(self):
         self.initialamount = self.initialamount - self.bet_amount
         print(f'amount remaining: {self.initialamount}')
-
-
