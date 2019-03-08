@@ -20,22 +20,22 @@ def check_if_blackjack(cards_at_hand):
     i = len(cards_at_hand)
     valuesum=0
     for count in range(0,i,1):
-        print(Deck.values[cards_at_hand[count][0][0]])
+        #print(Deck.values[cards_at_hand[count][0][0]])
         valuesum += int(Deck.values[cards_at_hand[count][0][0]])
-        if valuesum == 21:
-            return True
-        else:
-            return False
+    if valuesum == 21:
+        return True
+    else:
+        return False
 
 def check_if_busted(cards_at_hand):
     i = len(cards_at_hand)
     valuesum = 0
     for count in range(0, i, 1):
         valuesum += int(Deck.values[cards_at_hand[count][0][0]])
-        if valuesum == 21:
-            return True
-        else:
-            return False
+    if valuesum == 21:
+        return True
+    else:
+        return False
 
 
 def declare_winner(dealercard1,dealercard2,playercard):
@@ -61,6 +61,9 @@ def declare_winner(dealercard1,dealercard2,playercard):
     elif dealersum == 21:
         print("Dealer black-jack")
         return "dealer"
+    elif playersum == 21:
+        print("Player black-jack")
+        return "player"
 
 def next_hand(playercard,deck):
     if input("Want to hit ? enter 'y' or 'n'") == 'y':
@@ -99,37 +102,13 @@ def main():
 
             #pop 2 cards for Player
             playercard = []
+            #playercard = [('ten','spades'),('ace','spades')]
 
             playercard.append(deck.popacard())
             playercard.append(deck.popacard())
 
             print(f"Player card #1 is {playercard[0][0][0]} of {playercard[0][0][1]}")
             print(f"Player card #2 is {playercard[1][0][0]} of {playercard[1][0][1]}")
-
-            if check_if_blackjack(playercard):
-                print("inside check_if_blackjack")
-                print("Player wins")
-                if another_hand():
-                    continue
-                else:
-                    if declare_winner(dealercard1, dealercard2, playercard) == "player":
-                        print("Player wins")
-                    elif declare_winner(dealercard1, dealercard2, playercard) == "dealer":
-                        print("Dealer wins")
-                    next_hit = False
-
-
-            if check_if_busted(playercard):
-                print("inside check_if_busted")
-                print("Busted !! Dealer wins !!")
-                if another_hand():
-                    continue
-                else:
-                    if declare_winner(dealercard1, dealercard2, playercard) == "player":
-                        print("Player wins")
-                    elif declare_winner(dealercard1, dealercard2, playercard) == "dealer":
-                        print("Dealer wins")
-                    next_hit = False
 
             hit_more = True
             while hit_more:
@@ -149,12 +128,11 @@ def main():
                 else:
                     hit_more=False
 
-
-            if declare_winner(dealercard1, dealercard2, playercard) == "player":
+            result = declare_winner(dealercard1, dealercard2, playercard)
+            if result == "player":
                 print("Player wins")
-            elif declare_winner(dealercard1, dealercard2, playercard) == "dealer":
-                print("Dealer wins")
-
+            elif result == "dealer":
+                print("dealer")
 
 
 main()
